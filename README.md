@@ -110,3 +110,11 @@ Training was done in **two phases** — Feature Extraction and Fine-Tuning — t
 The **EfficientNetB0 + Lion optimizer** achieved the best results — **~79% test accuracy** with strong generalization.  
 This experiment highlights how **optimizer choice** and **staged fine-tuning** dramatically influence transfer learning performance.
 
+---
+
+## 📞 Contact
+
+**Subhankar Pandit**  
+**Full Stack Developer | Backend Engineer | AI/ML**  
+**GitHub**: https://github.com/SubhankarA8415  
+**LinkedIn**: https://linkedin.com/in/subhankar-pandit   
