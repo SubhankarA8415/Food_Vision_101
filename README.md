@@ -112,7 +112,7 @@ This experiment highlights how **optimizer choice** and **staged fine-tuning** d
 
 ---
 
-## *IMP - Colab notebook and pdf uploaded are not viewable directly needs to get downloaded otherwise view directly from google drive link shared : 🔗 <a href="https://colab.research.google.com/drive/1_obIJF8VhGxnkpBbU68GY3YDSbNxbgrT?usp=sharing">Link to notebook</a> *
+## IMP - Colab notebook and pdf uploaded are not viewable directly needs to get downloaded otherwise view directly from google drive link shared : 🔗 <a href="https://colab.research.google.com/drive/1_obIJF8VhGxnkpBbU68GY3YDSbNxbgrT?usp=sharing">Link to notebook</a> 
 
 ---
 
