@@ -1,4 +1,4 @@
-# 🍱 Food Vision — EfficientNetB0 (Adam vs Lion Optimizer, *IMP - Colab notebook and pdf uploaded are not viewable directly needs to get downloaded otherwise direct link for notebook in drive is provided at the bottom*)
+# 🍱 Food Vision — EfficientNetB0 (Adam vs Lion Optimizer)
 
 A deep learning project focused on **food image classification** using transfer learning with **EfficientNetB0**.  
 The model was trained and fine-tuned on the **Food101 dataset** to compare the performance of two modern optimizers — **Adam** and **Lion**.
@@ -112,7 +112,7 @@ This experiment highlights how **optimizer choice** and **staged fine-tuning** d
 
 ---
 
-## 🔗 <a href="https://colab.research.google.com/drive/1_obIJF8VhGxnkpBbU68GY3YDSbNxbgrT?usp=sharing">Link to notebook</a>
+## *IMP - Colab notebook and pdf uploaded are not viewable directly needs to get downloaded otherwise view directly from google drive link shared : 🔗 <a href="https://colab.research.google.com/drive/1_obIJF8VhGxnkpBbU68GY3YDSbNxbgrT?usp=sharing">Link to notebook</a> *
 
 ---
 
