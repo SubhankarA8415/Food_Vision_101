@@ -1,124 +1,559 @@
-# 🍱 Food Vision — EfficientNetB0 (Adam vs Lion Optimizer)
+# 🍱 Food Vision Big
 
-A deep learning project focused on **food image classification** using transfer learning with **EfficientNetB0**.  
-The model was trained and fine-tuned on the **Food101 dataset** to compare the performance of two modern optimizers — **Adam** and **Lion**.
+### Production-Grade Deep Learning Food Image Classification System
 
----
+<p align="center">
 
-## 🧠 Project Overview
+![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-DeepLearning-FF6F00?style=for-the-badge&logo=tensorflow)
+![Keras](https://img.shields.io/badge/Keras-CNN-D00000?style=for-the-badge&logo=keras)
+![Computer Vision](https://img.shields.io/badge/Computer-Vision-00ACC1?style=for-the-badge)
+![EfficientNetB0](https://img.shields.io/badge/EfficientNet-B0-43A047?style=for-the-badge)
+![Transfer Learning](https://img.shields.io/badge/Transfer-Learning-7B1FA2?style=for-the-badge)
+![TensorFlow Datasets](https://img.shields.io/badge/TFDS-Food101-F57C00?style=for-the-badge)
+![Deep Learning](https://img.shields.io/badge/Deep-Learning-3949AB?style=for-the-badge)
 
-This project explores the use of **EfficientNetB0**, a lightweight yet powerful CNN, for classifying **101 types of food images**.
-
-Training was done in **two phases** — Feature Extraction and Fine-Tuning — to ensure stability and good generalization.
-
-**Experiments were conducted using:**
-- TensorFlow / Keras  
-- Food101 (TensorFlow Datasets)  
-- Image Size: **224×224**  
-- Callbacks: **TensorBoard**, **ModelCheckpoint**, **ReduceLROnPlateau**
+</p>
 
 ---
 
-## ⚙️ Training Pipeline
+# 📌 Overview
 
-| Phase                  | Description                                                   | Epochs | Learning Rate  | Layers Trained   |
-| ---------------------- | ------------------------------------------------------------- | ------ | -------------- | ---------------- |
-| **Feature Extraction** | Train top dense layers with EfficientNetB0 frozen             | 10     | 0.001 → 0.0005 | Top Layers       |
-| **Fine-Tuning**        | Unfreeze last 50 layers for domain-specific adaptation        | 8–10   | 1e-5           | Last 50 Layers   |
+Food Vision Big is a production-grade Deep Learning image classification system built to recognize **101 food categories** using transfer learning with **EfficientNetB0**.
 
----
+The project demonstrates a complete computer vision workflow—from large-scale dataset preparation and optimized TensorFlow data pipelines to feature extraction, fine-tuning, optimizer comparison, and model evaluation. Trained on the **Food101** dataset, the system explores how different optimization strategies influence transfer learning performance while maintaining a scalable and production-oriented training pipeline. :contentReference[oaicite:0]{index=0}
 
-## ⚡ Model Configurations
+The project also compares two modern optimizers—**Adam** and **Lion**—to analyze convergence behavior, model stability, and classification accuracy under identical training configurations.
 
 ---
 
-### 🧩 Model 1 — EfficientNetB0 + **Adam Optimizer**
+# 🎥 Project Resources
 
-**Objective:** Build a stable and high-performing food classifier through feature extraction + controlled fine-tuning.
-
-#### 🔢 Results
-
-| Phase              | Train Acc | Val Acc | Val Loss |
-| ------------------ | --------- | ------- | -------- |
-| Feature Extraction | 0.55      | 0.69    | 1.13     |
-| Fine-Tuning        | 0.63      | 0.74    | 0.93     |
-| **Final**          | 0.66      | **0.75**| **0.87** |
-
-✅ **Final Test Accuracy:** ~75.5%  
-💾 **Model Path:** `/models/food_vision_final_adam_model.keras`
-
-#### 📌 Key Takeaways
-- Adam’s adaptive learning enabled smooth & stable convergence  
-- Feature extraction established a solid feature base  
-- Fine-tuning improved class-specific texture recognition  
+| Resource | Link |
+|----------|------|
+| 📂 GitHub Repository | Repository Home |
+| 🏗️ Architecture Documentation | `docs/Architecture.md` |
+| 📄 Project Presentation | `docs/Food-Vision-Big-tm.pdf` |
+| 🎥 Public Project Showcase | https://youtu.be/ZqmDicba5pU?si=gqtpQxcwOaJfuyIb |
+| 🔒 Complete Technical Demonstration | Available upon request (Recruiters, Interviewers, Collaborators & Technical Discussions) |
 
 ---
 
-### 🦁 Model 2 — EfficientNetB0 + **Lion Optimizer**
+# 🚀 Key Features
 
-**Objective:** Evaluate the newly introduced **Lion** optimizer for efficient convergence and higher accuracy.
+## 🖼️ Dataset Engineering
 
-#### 🔢 Results
-
-| Phase                     | Train Accuracy | Val Accuracy | Val Loss |
-| ------------------------  | :------------: | :----------: | :------: |
-| Feature Extraction        |      0.51      |     0.66     |   1.54   |
-| Fine-Tuning (Epoch 10–18) |      0.74      |     0.79     |   0.79   |
-| **Final (Epoch 20)**      |    **0.77**    |   **0.80**   | **0.78** |
-
-✅ **Final Test Accuracy:** ~79%  
-💾 **Model Path:** `/models/food_vision_final_lion_model.keras`
-
-#### 📌 Key Takeaways
-- Lion optimizer gives smoother updates with minimal oscillation  
-- Gradual unfreezing prevents overfitting  
-- Achieved **~4% higher accuracy** than Adam under identical configs  
+- Food101 dataset with 101 food categories
+- TensorFlow Datasets (TFDS) integration
+- Optimized `tf.data` input pipeline
+- Parallel data loading and automatic prefetching
+- GPU-optimized batch processing
+- Large-scale image classification workflow
 
 ---
 
-## 📊 Comparative Summary
+## 🧹 Image Preprocessing Pipeline
 
-| Optimizer | Final Val Accuracy | Test Accuracy | Test Loss | Remarks                      |
-| --------- | ------------------ | ------------- | --------- | ---------------------------- |
-| **Adam**  | ~75%               | 75.5%         | 0.88      | Stable, well-generalized     |
-| **Lion**  | **~79%**           | **79%**       | **0.78**  | Faster, smoother convergence |
-
-🔹 **Winner:** **Lion Optimizer** — higher accuracy + lower loss.
-
----
-
-## 🧪 Key Insights
-
-- Gradual layer unfreezing significantly boosts transfer learning performance  
-- Both Adam & Lion perform well, but **Lion shows superior fine-tuning stability**  
-- EfficientNetB0 is an excellent feature extractor for Food101  
+- Automatic image resizing (224 × 224)
+- Float32 tensor conversion
+- Pixel normalization
+- Efficient tensor preparation
+- Production-ready preprocessing workflow
+- Native TensorFlow image operations
 
 ---
 
-## 🚀 Tools & Libraries
+## 🧠 Deep Learning Pipeline
 
-- TensorFlow / Keras  
-- TensorFlow Datasets (TFDS)  
-- NumPy, Matplotlib  
-- TensorBoard for experiment tracking  
-- Google Colab + Drive for training & storage  
-
----
-
-## 🏁 Conclusion
-
-The **EfficientNetB0 + Lion optimizer** achieved the best results — **~79% test accuracy** with strong generalization.  
-This experiment highlights how **optimizer choice** and **staged fine-tuning** dramatically influence transfer learning performance.
+- EfficientNetB0 transfer learning
+- Feature extraction workflow
+- Fine-tuning for domain adaptation
+- 101-class softmax classification
+- TensorFlow/Keras implementation
+- Production-oriented training pipeline
 
 ---
 
-## IMP - Colab notebook and pdf uploaded are not viewable directly needs to get downloaded otherwise view directly from google drive link shared : 🔗 <a href="https://colab.research.google.com/drive/1_obIJF8VhGxnkpBbU68GY3YDSbNxbgrT?usp=sharing">Link to notebook</a> 
+## ⚙️ Training Optimization
+
+- Adam & Lion optimizer comparison
+- Mixed Precision Training
+- TensorBoard experiment tracking
+- Model checkpointing
+- ReduceLROnPlateau scheduler
+- GPU-accelerated training
 
 ---
 
-## 📞 Contact
+## 📊 Model Evaluation
 
-**Subhankar Pandit**  
-**Full Stack Developer | Backend Engineer | AI/ML | Cloud**  
-**GitHub**: https://github.com/SubhankarA8415  
-**LinkedIn**: https://linkedin.com/in/subhankar-pandit   
+- Optimizer performance comparison
+- Training & validation accuracy monitoring
+- Loss curve analysis
+- Model generalization evaluation
+- Comparative performance analysis
+- Exportable production models
+
+---
+
+# 🏗️ High-Level System Architecture
+
+The project follows a modular Deep Learning workflow where every stage transforms raw image data into optimized model predictions.
+
+```
+
+Food101 Dataset
+
+↓
+
+TensorFlow Dataset (TFDS)
+
+↓
+
+Image Preprocessing
+
+↓
+
+EfficientNetB0
+
+↓
+
+Feature Extraction
+
+↓
+
+Fine-Tuning
+
+↓
+
+Optimizer Training
+(Adam / Lion)
+
+↓
+
+Model Evaluation
+
+↓
+
+101-Class Food Classification
+
+```
+
+A detailed explanation of the complete Deep Learning pipeline, model architecture, optimization strategy, and software engineering design is available in:
+
+📄 **docs/Architecture.md**
+
+---
+
+# 📂 Project Structure
+
+```bash
+Food_Vision_101/
+│
+├── Colab_code/
+│   ├── Food_Vision.ipynb
+│   └── food-vision.pdf
+│
+├── Models/
+│   ├── Feature_Extraction/
+│   ├── Fine_Tune_1/
+│   └── Final_Model/
+│
+├── docs/
+│   ├── Architecture.md
+│   └── Food-Vision-Big-tm.pdf
+│
+└── README.md
+```
+
+---
+
+# 🧠 Deep Learning Pipeline
+
+The complete workflow follows a structured transfer learning pipeline.
+
+## 1️⃣ Dataset Preparation
+
+- Food101 dataset loading
+- TensorFlow Dataset integration
+- Efficient dataset management
+- Automatic dataset preprocessing
+
+---
+
+## 2️⃣ Data Pipeline
+
+- Parallel data loading
+- Image resizing
+- Tensor conversion
+- Batch generation
+- Automatic prefetching
+- GPU optimization
+
+---
+
+## 3️⃣ Feature Extraction
+
+- ImageNet pre-trained EfficientNetB0
+- Frozen convolutional backbone
+- High-level visual feature learning
+- Dense classification head training
+
+---
+
+## 4️⃣ Fine-Tuning
+
+- Unfreezing upper EfficientNet layers
+- Low learning rate optimization
+- Domain-specific feature adaptation
+- Improved class discrimination
+
+---
+
+## 5️⃣ Optimizer Comparison
+
+Two optimization strategies were evaluated:
+
+### Adam Optimizer
+
+- Stable convergence
+- Adaptive learning rates
+- Strong baseline performance
+- Reliable generalization
+
+### Lion Optimizer
+
+- Faster convergence
+- Improved optimization stability
+- Higher classification accuracy
+- Better final model performance
+
+---
+
+## 6️⃣ Model Evaluation
+
+The trained models were evaluated using:
+
+- Validation Accuracy
+- Validation Loss
+- Optimizer Comparison
+- Generalization Performance
+- Classification Stability
+
+---
+
+# 🏛️ Model Architecture
+
+The project is built around **EfficientNetB0**, a lightweight yet highly efficient Convolutional Neural Network optimized for image classification tasks.
+
+The training architecture follows a transfer learning approach:
+
+```
+
+Input Image (224 × 224)
+
+↓
+
+Image Preprocessing
+
+↓
+
+EfficientNetB0 Backbone
+(ImageNet Pre-trained)
+
+↓
+
+Global Average Pooling
+
+↓
+
+Dropout Layer
+
+↓
+
+Dense Classification Layer
+
+↓
+
+Softmax Output
+
+↓
+
+101 Food Categories
+
+```
+
+EfficientNetB0 provides a strong feature extraction backbone while significantly reducing computational complexity compared to traditional CNN architectures.
+
+---
+
+# ⚙️ Training Strategy
+
+Training was performed in two distinct stages to maximize model performance while minimizing overfitting.
+
+## 📌 Stage 1 — Feature Extraction
+
+- Frozen EfficientNetB0 backbone
+- Train only the classification head
+- Fast convergence
+- Stable feature learning
+- Reduced computational cost
+
+---
+
+## 📌 Stage 2 — Fine-Tuning
+
+- Unfreeze upper EfficientNet layers
+- Lower learning rate
+- Domain-specific feature adaptation
+- Improved class discrimination
+- Better generalization performance
+
+---
+
+## 🔄 Optimization Techniques
+
+The project evaluates two optimization algorithms under identical training conditions.
+
+### Adam Optimizer
+
+- Adaptive learning rates
+- Stable convergence
+- Reliable optimization
+- Strong baseline performance
+
+### Lion Optimizer
+
+- Momentum-based optimization
+- Faster convergence
+- Smoother parameter updates
+- Improved validation performance
+
+Additional training enhancements include:
+
+- Mixed Precision Training
+- TensorBoard Logging
+- Model Checkpointing
+- Learning Rate Scheduling
+- GPU-Accelerated Training
+
+---
+
+# 📊 Performance Summary
+
+The project compares two optimization strategies for transfer learning with EfficientNetB0.
+
+| Optimizer | Validation Accuracy | Test Accuracy | Key Observation |
+|-----------|--------------------:|--------------:|----------------|
+| Adam | ~75% | ~75.5% | Stable convergence with strong generalization |
+| Lion | **~79%** | **~79%** | Faster convergence with improved final accuracy |
+
+🏆 **Best Performing Model:** EfficientNetB0 + Lion Optimizer
+
+---
+
+# 🛠️ Technology Stack
+
+## 🖥️ Programming
+
+- Python
+
+---
+
+## 🤖 Deep Learning
+
+- TensorFlow
+- Keras
+- EfficientNetB0
+- Transfer Learning
+- Fine-Tuning
+- Mixed Precision Training
+
+---
+
+## 👁️ Computer Vision
+
+- TensorFlow Datasets (TFDS)
+- Food101 Dataset
+- Image Classification
+- CNN Architectures
+
+---
+
+## 📊 Data Processing
+
+- NumPy
+- Matplotlib
+- TensorFlow Data Pipeline
+
+---
+
+## ⚙️ Experiment Tracking
+
+- TensorBoard
+- ModelCheckpoint
+- ReduceLROnPlateau
+- Google Colab
+
+---
+
+# ▶️ Running the Project
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/SubhankarA8415/Food_Vision_101.git
+
+cd Food_Vision_101
+```
+
+---
+
+## 2️⃣ Install Dependencies
+
+```bash
+pip install tensorflow tensorflow-datasets matplotlib numpy
+```
+
+---
+
+## 3️⃣ Launch Training Notebook
+
+Open:
+
+```text
+Colab_code/Food_Vision.ipynb
+```
+
+or upload the notebook to **Google Colab** for GPU-accelerated training.
+
+---
+
+# 🌍 Real-World Applications
+
+Food Vision demonstrates how Deep Learning and Computer Vision can be applied to solve real-world image recognition problems.
+
+Potential applications include:
+
+### 🍽️ Smart Food Recognition
+
+- Automatic food identification
+- Digital menu systems
+- Restaurant automation
+
+---
+
+### 🥗 Nutrition & Healthcare
+
+- Calorie estimation
+- Dietary tracking
+- Personalized nutrition assistants
+
+---
+
+### 📱 Mobile AI Applications
+
+- Smartphone food recognition
+- Edge AI image classification
+- Intelligent camera assistants
+
+---
+
+### 🤖 AI Research & Education
+
+- Transfer learning demonstrations
+- Optimizer comparison studies
+- Deep Learning experimentation
+- Computer Vision education
+
+---
+
+# 🚀 Future Improvements
+
+Potential future enhancements include:
+
+- Vision Transformers (ViTs)
+- ConvNeXt architectures
+- EfficientNetV2
+- Real-time webcam inference
+- Mobile deployment using TensorFlow Lite
+- ONNX model export
+- Cloud deployment
+- Explainable AI using Grad-CAM
+- Multi-label food recognition
+
+---
+
+# 📚 Documentation
+
+This repository follows a documentation-first approach.
+
+Included documentation:
+
+- ✅ Professional README
+- ✅ High-Level System Architecture
+- ✅ Project Presentation
+- ✅ Public Project Showcase
+- ✅ Colab Notebook
+- ✅ Trained Models
+
+---
+
+# 🔒 Complete Project Demonstration
+
+A comprehensive technical demonstration of the complete project is available for:
+
+- Recruiters
+- Hiring Managers
+- Technical Interviewers
+- Academic Evaluation
+- Professional Collaboration
+- Technical Discussions
+
+The complete demonstration includes:
+
+- Complete notebook walkthrough
+- Deep Learning pipeline explanation
+- Transfer learning strategy
+- Model architecture discussion
+- Optimizer comparison
+- Training workflow
+- Experimental observations
+
+Please reach out if you would like access for any of the above purposes.
+
+---
+
+# ⚠️ Disclaimer
+
+This project has been developed for educational, research, and demonstration purposes.
+
+The trained models and experimental results are intended to showcase modern Deep Learning and Transfer Learning techniques using the Food101 dataset and should not be interpreted as production-ready commercial food recognition systems.
+
+---
+
+# 👨‍💻 Developer
+
+## **Subhankar Pandit**
+
+**Software Engineer | Full Stack Developer | Backend Engineering | Artificial Intelligence**
+
+Building intelligent software through scalable backend systems, modern web technologies, and AI-powered applications.
+
+---
+
+# 📬 Connect With Me
+
+- 🌐 **Portfolio:** https://portfolio-subhankar-pandits-projects.vercel.app/
+- 💻 **GitHub:** https://github.com/SubhankarA8415
+- 💼 **LinkedIn:** https://www.linkedin.com/in/subhankar-pandit-080449255
+- 📺 **YouTube:** https://www.youtube.com/@SubhankarDevLab
+- 📧 **Email:** subhankar.pandit2002@gmail.com
+
+---
+
+# ⭐ Support the Project
+
+If you found this project useful or interesting, consider giving the repository a ⭐.
+
+It helps support the project and encourages future development of Deep Learning, Computer Vision, and AI-powered software engineering projects.
